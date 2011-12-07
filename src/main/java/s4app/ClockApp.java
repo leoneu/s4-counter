@@ -30,14 +30,9 @@ public class ClockApp extends App {
         clockPE.setStreams(eventSource);
     }
 
-    // this is the method consumer apps will use to get the event source.
-    public EventSource<ClockEvent> getEventSource() {
-        return eventSource;
-    }
-
     @Override
     protected void close() {
         System.out.println("Closing CounterApp...");
-
+        eventSource.close();
     }
 }
