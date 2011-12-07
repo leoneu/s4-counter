@@ -18,6 +18,7 @@ public class ClockApp extends App {
     }
 
     @SuppressWarnings("unchecked")
+    // generic array due to varargs generates a warning.
     @Override
     protected void init() {
         System.out.println("Initing CounterApp...");
