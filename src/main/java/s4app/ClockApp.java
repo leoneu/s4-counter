@@ -6,11 +6,9 @@ import org.apache.s4.base.Event;
 import org.apache.s4.core.App;
 import org.apache.s4.core.EventSource;
 
-import s4app.ClockPE.ClockEvent;
-
 public class ClockApp extends App {
 
-    private EventSource<ClockEvent> eventSource;
+    private EventSource<Event> eventSource;
 
     @Override
     protected void start() {
@@ -26,7 +24,7 @@ public class ClockApp extends App {
         ClockPE clockPE = new ClockPE(this);
         clockPE.setTrigger(Event.class, 1, 1, TimeUnit.SECONDS);
 
-        eventSource = new EventSource<ClockEvent>(this, "I can give you the time!");
+        eventSource = new EventSource<Event>(this, "I can give you the time!");
         clockPE.setStreams(eventSource);
     }
 
