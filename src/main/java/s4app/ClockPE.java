@@ -2,16 +2,16 @@ package s4app;
 
 import org.apache.s4.base.Event;
 import org.apache.s4.core.App;
-import org.apache.s4.core.SingletonPE;
+import org.apache.s4.core.ProcessingElement;
 import org.apache.s4.core.Streamable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ClockPE extends SingletonPE {
+public class ClockPE extends ProcessingElement {
 
     private static final Logger logger = LoggerFactory.getLogger(ClockPE.class);
 
-    private Streamable<Event>[] targetStreams;
+    private Streamable[] targetStreams;
     private long tick = 0;
 
     public ClockPE(App app) {
@@ -22,11 +22,11 @@ public class ClockPE extends SingletonPE {
      * @param targetStreams
      *            the {@link UserEvent} streams.
      */
-    public void setStreams(Streamable<Event>... targetStreams) {
+    public void setStreams(Streamable... targetStreams) {
         this.targetStreams = targetStreams;
     }
 
-    public void onTrigger(Event inEvent) {
+    public void onTime() {
         Event event = new Event();
         event.put("tick", Long.class, tick++);
 
@@ -38,6 +38,12 @@ public class ClockPE extends SingletonPE {
 
     @Override
     protected void onRemove() {
+
+    }
+
+    @Override
+    protected void onCreate() {
+        // TODO Auto-generated method stub
 
     }
 }
